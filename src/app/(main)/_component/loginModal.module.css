@@ -1,0 +1,143 @@
+.modalBackground {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 98;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modalBackground {
+      background-color: rgba(91, 112, 131, 0.4);
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 32px;
+  background-color: white;
+  border-radius: 16px;
+  top: 15%;
+  width: 50vw;
+  z-index: 99;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 31px;
+  font-weight: bold;
+}
+
+.closeButton {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 17px;
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+  left: 32px;
+  top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background-color: rgba(15,20,25, 0.1);
+}
+
+.login{
+  font-size: 26px;
+}
+
+.modalBody {
+  padding: 60px 0px 90px 0px;
+}
+
+.modalBody img {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 200px;
+height: 200px;
+margin: auto;
+margin-bottom: 10px;
+}
+
+@media all and (min-width: 687px) {
+  .modal {
+    top: 1%;
+    width: 420px;
+    border-radius: 16px !important;
+  }
+  .modalHeader {
+      max-width: 100%;
+  }
+}
+@media all and (max-width: 687px) {
+  .modal{
+    top: 0%;
+    width: 100dvw;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+.modalFooter {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actionButton {
+  width: 100%;
+  max-width: 340px;
+  margin: 4px auto auto auto;
+  height: 50px;
+  border-radius: 10px;
+  background-color: rgb(15, 20, 25);
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  border: none;
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+}
+
+.actionButton:hover {
+  background-color: rgb(39,44,48);
+}
+
+.actionButton img {
+  width: 340px;
+  height: 50px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .closeButton {
+      background-color: black;
+  }
+  .closeButton svg {
+      fill: white;
+  }
+}
+
+
