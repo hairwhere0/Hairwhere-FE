@@ -1,0 +1,27 @@
+.header {
+  align-items: center;
+  background-color: white;
+  width: inherit;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  border-color: rgb(239, 243, 244);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.header a {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+}
+
+.logo {
+  margin: auto;
+}
+
+.logo img {
+  width: 60px;
+  height: 60px;
+}
