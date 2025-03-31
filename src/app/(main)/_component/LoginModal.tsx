@@ -2,9 +2,15 @@
 
 import style from '@/app/(main)/_component/loginModal.module.css';
 import {useRouter} from "next/navigation";
+import { getKaKaoLoginURL } from '../login/_lib/getKakaoLoginURL';
 
 export default function LoginModal() {
   const router = useRouter();
+
+  const socialKakaoLogin = () => {
+    window.localStorage.setItem("provider", "kakao");
+    window.location.href = getKaKaoLoginURL();
+  }
 
   const onClickClose = () => {
     router.back();
@@ -29,7 +35,7 @@ export default function LoginModal() {
           <img src='/logo.svg' alt='Logo'/>
         </div>
         <div className={style.modalFooter}>
-          <button className={style.actionButton}>
+          <button className={style.actionButton} onClick={socialKakaoLogin}>
             <img src="/kakao.png" alt='kakao'/>
           </button>
         </div>
