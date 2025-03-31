@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  height: 100vh; 
+  background-color: #fff;
+}
+
+.main {
+  background-color: white;
+  overflow-y: auto;
+  flex: 1;
+  border-color: rgb(239, 243, 244);
+  border-width: 0px 1px 0px 1px;
+  border-style: solid;
+  padding-bottom: 60px;
+}
+
+.main::-webkit-scrollbar { /*웹킷 기반 브라우저(chrome, safari등)에서 스크롤바 숨기기*/
+  display: none;
+}
+
+.main { /* 파이어폭스 */
+  scrollbar-width: none; /* Firefox */
+}
+
+.main { /* 파이어폭스 구체적인 설정 */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.nav {
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  border-color: rgb(239, 243, 244);
+  border-width: 1px 1px 0px 1px;
+  border-style: solid;
+}
+
+.nav li {
+  list-style-type: none;
+  flex: 1;
+  margin: 5px;
+  text-align: center;
+}
+
+/* 모바일 화면에 대한 스타일 */
+@media all and (min-width: 300px) {
+  .main {
+    width: 100dvw; 
+  }
+
+  .bottomSectionWrapper {
+    width: 100dvw; 
+    height: auto; 
+    margin: 0; 
+    padding: 0;
+    bottom: 0;
+  }
+
+  .nav {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: inherit;
+    z-index: 95; /* NavMenu가 다른 요소들 위에 오도록 설정 */
+  }
+}
+
+/* 패드 화면에 대한 스타일 */
+@media all and (min-width: 602px) {
+  .main {
+    width: 602px;
+  }
+
+  .bottomSectionWrapper {
+    width: 602px;
+  }
+}
