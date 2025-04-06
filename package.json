@@ -10,11 +10,14 @@
     "mock": "npx tsx watch ./src/mocks/http.ts"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.6.0",
     "@tanstack/react-query": "^5.71.0",
     "axios": "^1.8.4",
+    "dayjs": "^1.11.13",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-intersection-observer": "^9.16.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
