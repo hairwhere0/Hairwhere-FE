@@ -3,7 +3,7 @@ import axios from "axios";
 type Props = {pageParam?: number};
 
 export default async function getPosts({pageParam}: Props) {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/photo/find/male?page=${pageParam}&size=15`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/photo/find/all?page=${pageParam}&size=15`);
 
   if(!res.data.code) {
     throw new Error('Failed to fetch data');

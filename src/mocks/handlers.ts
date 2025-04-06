@@ -228,7 +228,7 @@ export const handlers = [
       })
     )
   }),
-  http.get(`photo/findByGender/male`, async ({ }) => {
+  http.get(`/photo/findByGender/male`, async ({ }) => {
     return new HttpResponse(
       JSON.stringify({
         code: "SUCCESS",
@@ -450,7 +450,7 @@ export const handlers = [
       })
     )
   }),
-  http.get(`photo/findByGender/female`, async ({ }) => {
+  http.get(`/photo/findByGender/female`, async ({ }) => {
     return new HttpResponse(
       JSON.stringify({
         code: "SUCCESS",
