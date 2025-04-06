@@ -3,8 +3,8 @@ import CategoryProvider from "./_component/CategoryProvider"
 import Header from "./_component/Header"
 import CommonLayout from "./_component/CommonLayout"
 import { Suspense } from "react"
-import LoadingSpinner from "./_component/LoadingSpinner"
 import CategoryDeciderSuspense from "./_component/CategoryDeciderSuspense"
+import Loading from "./_component/LoadingSpinner"
 
 export default async function Home() {
 
@@ -12,7 +12,7 @@ export default async function Home() {
     <div className={style.main}>
       <CategoryProvider>
         <Header/>
-        <Suspense fallback={<LoadingSpinner/>}>
+        <Suspense fallback={<Loading/>}>
           <CategoryDeciderSuspense/>
         </Suspense>
         <CommonLayout/>
