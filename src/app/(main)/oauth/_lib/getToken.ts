@@ -4,8 +4,8 @@ export const getToken = async (
   authCode: string
 ): Promise<{ success: boolean; }> => {
   try {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/login/kakao?code=${authCode}`
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/kakao/getAccessToken?code=${authCode}`
     );
 
     if (response.status === 200 && response.data && response.data.result) {

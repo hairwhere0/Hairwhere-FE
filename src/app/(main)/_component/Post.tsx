@@ -1,7 +1,7 @@
 "use client"
 
 import style from './post.module.css'
-// import Link from 'next/link'
+import Link from 'next/link'
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
@@ -138,9 +138,9 @@ export default function Post({ post }: Props) {
     <>
       <div className={style.card}>
         <div className={style.cover}>
-          {/* <Link href={`/${post.userName}/${post.id}`}> */}  
+          <Link href={`/${post.kakaoId}/${post.id}`}>  
             <img src={post.photoImagePath[0]} alt=""/>         
-          {/* </Link> */}
+          </Link>
           <div className={style.heartButton}>
             <button>
               {false ?

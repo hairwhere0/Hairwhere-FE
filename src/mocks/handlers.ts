@@ -671,5 +671,34 @@ export const handlers = [
         }
       })
     )
+  }),
+  http.get(`/photo/find/:photoId`, async ({ }) => {
+    return new HttpResponse(
+      JSON.stringify({
+        code: "SUCCESS",
+        message: "성공",
+        result: {
+          id: generateId(),
+          nickname: "예쁜여자",
+          photoImagePath: [
+            faker.image.avatar(),
+            faker.image.avatar(),
+            faker.image.avatar(),
+          ],
+          likeCount: 10,
+          hairName: "처피뱅",
+          text: "너무 예뻐요",
+          gender: "female",
+          created: new Date(),
+          hairSalon: "머리 잘하는 집",
+          hairSalonAddress: "서울 양천구 목동남로4길 10",
+          hairLength: "쇼트",
+          hairColor: "탈색",
+          kakaoId: generateId()+1,
+          userProfilePath: faker.image.avatar(),
+          likedNickNames: [],
+        },
+      })
+    )
   })
 ]
