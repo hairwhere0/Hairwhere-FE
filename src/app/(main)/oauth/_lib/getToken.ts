@@ -8,14 +8,14 @@ export const getToken = async (
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/kakao/getAccessToken?code=${authCode}`
     );
 
-    if (response.status === 200 && response.data && response.data.result) {
-      const userData = response.data.result;
+    if (response.status === 200 && response.data) {
+      const accessToken = response.data;
       
       // 응답 데이터 구조 디버깅
       console.log("Response data structure:", JSON.stringify(response.data, null, 2));
       
-      if(userData) {
-        localStorage.setItem('access_token', userData.access_token);
+      if(accessToken) {
+        localStorage.setItem('accessToken', accessToken);
         return { success: true };
       }
     }

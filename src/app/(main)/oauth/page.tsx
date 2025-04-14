@@ -31,7 +31,7 @@ export default function OauthPage() {
 
   return (
     <div className={style.container}>
-      <LoadingSpinner size={"large"}/>
+      <LoadingSpinner/>
     </div>
   )
 }
