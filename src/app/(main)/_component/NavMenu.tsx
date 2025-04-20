@@ -35,7 +35,7 @@ export default function NavMenu() {
         </Link>
       </li>
       <li> {/* 검색페이지 */}
-        {/* <Link href="/search"> */}
+        <Link href="/search">
           <div className={style.navPill}>
             {segment && (['search', 'searchResult'].includes(segment)) ?
               <>
@@ -57,7 +57,7 @@ export default function NavMenu() {
                 </svg>
               </>}
           </div>
-        {/* </Link> */}
+        </Link>
       </li>
       <li> {/* 글 작성페이지 */}
         <Link href="/post">
