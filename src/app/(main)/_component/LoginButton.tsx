@@ -9,6 +9,10 @@ export default function LoginButton() {
 
   const onLogout = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('id');
+    localStorage.removeItem('kakaoId');
+    localStorage.removeItem('nickName');
+    localStorage.removeItem('profileImageUrl');
     document.cookie = `accessToken=; path=/; max-age=0`;
     router.replace('/');
   };

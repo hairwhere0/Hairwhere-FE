@@ -5,6 +5,7 @@ import LoadingSpinner from "../_component/LoadingSpinner";
 import style from "./oauthPage.module.css";
 import { useRouter } from "next/navigation";
 import { getToken } from "./_lib/getToken";
+import { getMyInfo } from "./_lib/getMyInfo";
 
 export default function OauthPage() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function OauthPage() {
       try {
         const tokenResponse = await getToken(code);
         if (tokenResponse.success) {
+          await getMyInfo();
           router.replace("/");
         }
       } catch (error) {
