@@ -4,13 +4,15 @@ import { faker } from '@faker-js/faker';
 const generateId = () => Date.now() + Math.floor(Math.random() * 1000);
 
 export const handlers = [
-  http.get(`/photo/find/all`, async ({ }) => {
+  http.get(`/photo/find/all`, async ({ request }) => {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') as string) || 0;
     return new HttpResponse(
       JSON.stringify({
         code: "SUCCESS",
         message: "성공",
         result: {
-          number: 0,
+          number: page,
           last: false,
           content: [
             {
@@ -228,12 +230,16 @@ export const handlers = [
       })
     )
   }),
-  http.get(`/photo/findByGender/male`, async ({ }) => {
+  http.get(`/photo/findByGender/male`, async ({ request }) => {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') as string) || 0;
     return new HttpResponse(
       JSON.stringify({
         code: "SUCCESS",
         message: "성공",
         result: {
+          number: page,
+          last: false,
           content: [
             {
               id: generateId(),
@@ -450,12 +456,16 @@ export const handlers = [
       })
     )
   }),
-  http.get(`/photo/findByGender/female`, async ({ }) => {
+  http.get(`/photo/findByGender/female`, async ({ request }) => {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') as string) || 0;
     return new HttpResponse(
       JSON.stringify({
         code: "SUCCESS",
         message: "성공",
         result: {
+          number: page,
+          last: false,
           content: [
             {
               id: generateId(),
@@ -701,13 +711,15 @@ export const handlers = [
       })
     )
   }),
-  http.get(`/photo/search`, async ({ }) => {
+  http.get(`/photo/search`, async ({ request }) => {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') as string) || 0;
     return new HttpResponse(
       JSON.stringify({
         code: "SUCCESS",
         message: "성공",
         result: {
-          number: 0,
+          number: page,
           last: false,
           content: [
             {
@@ -925,13 +937,15 @@ export const handlers = [
       })
     )
   }),
-  http.get(`/photo/find/:id/likes`, async ({ }) => {
+  http.get(`/photo/find/:id/likes`, async ({ request }) => {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') as string) || 0;
     return new HttpResponse(
       JSON.stringify({
         code: "SUCCESS",
         message: "성공",
         result: {
-          number: 0,
+          number: page,
           last: false,
           content: [
             {
