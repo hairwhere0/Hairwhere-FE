@@ -79,7 +79,7 @@ export default function NavMenu() {
         </Link>
       </li>
       <li> {/* 좋아요페이지 */}
-        {/* <Link href="/likes"> */}
+        <Link href="/likes">
           <div className={style.navPill}>
             {segment === 'likes'? 
             <svg aria-label="좋아요" fill="currentColor" role="img" viewBox="0 0 24 24" width={26} height={26}>
@@ -91,7 +91,7 @@ export default function NavMenu() {
             </svg>
           }
           </div>
-        {/* </Link> */}
+        </Link>
       </li>
       <li> {/*  프로필페이지 */}
         {/* <Link href={"/myPage"}> */}
