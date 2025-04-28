@@ -1,6 +1,6 @@
 "use client"
 
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import SeeMore from './SeeMore';
 import style from './header.module.css';
 import { useRouter } from 'next/navigation';
@@ -12,9 +12,14 @@ type Props = {
 };
 
 export default function Header({ post }: Props) {
+  const [nickName, setNickName] = useState<string>('');
   const queryClient = useQueryClient();
   const router = useRouter();
-  const nickName = localStorage.getItem('nickName');
+  
+  useEffect(() => {
+    setNickName(localStorage.getItem('nickName') || '');
+  }, []);
+
   const liked = !!post.likedNickNames?.find((v) => v === nickName);
 
   const onClickBack = () => {

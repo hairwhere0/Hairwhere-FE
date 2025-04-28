@@ -1,11 +1,16 @@
 "use client"
 
+import { useEffect, useState } from 'react';
 import style from './loginButton.module.css';
 import { useRouter } from 'next/navigation';
 
 export default function LoginButton() {
   const router = useRouter();
-  const accessToken = localStorage.getItem('accessToken');
+  const [accessToken, setAccessToken] = useState<string>('');
+
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('accessToken') || '');
+  }, []);
 
   const onLogout = () => {
     localStorage.removeItem('accessToken');

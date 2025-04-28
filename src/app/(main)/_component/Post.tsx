@@ -7,7 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 import type {Post}  from '../../../model/Post';
 import { PageInfo } from '@/model/PageInfo';
-import {MouseEventHandler} from "react";
+import {MouseEventHandler, useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -19,9 +19,13 @@ dayjs.locale('ko');
 dayjs.extend(relativeTime)
 
 export default function Post({ post }: Props) {
+  const [nickName, setNickName] = useState<string>('');
   const queryClient = useQueryClient();
-  const nickName = localStorage.getItem('nickName');
   const router = useRouter();
+
+  useEffect(() => {
+    setNickName(localStorage.getItem('nickName') || '');
+  }, []);
 
   const liked = !!post.likedNickNames?.find((v) => v === nickName);
 
