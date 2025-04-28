@@ -16,6 +16,7 @@ export const getToken = async (
       
       if(accessToken) {
         localStorage.setItem('accessToken', accessToken);
+        document.cookie = `accessToken=${accessToken}; path=/; max-age=86400`;
         return { success: true };
       }
     }
