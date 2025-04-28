@@ -28,10 +28,12 @@ export default function SearchResult({ searchParams }: Props) {
     queryFn: getSearchResult,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
-      if (Array.isArray(lastPage)) {
-        return lastPage.at(-1)?.content[-1].id;
+      // 마지막 페이지가 있고, 페이지가 비어있지 않고, 다음 페이지가 있다면 다음 페이지 번호 반환
+      if (lastPage && !lastPage.last) {
+        return lastPage.number + 1;
       }
-      return undefined; // 배열이 아닐 경우 안전하게 undefined 반환
+      // 마지막 페이지이거나 콘텐츠가 없으면 더 이상 페이지를 가져오지 않음
+      return undefined;
     },
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
