@@ -1,6 +1,6 @@
 export interface User {
-  loginId: string;
-  name: string;
-  profilePath: string;
-  email: string;
+  id: string;
+  kakaoId: number;
+  nickName: string;
+  profileImagePath: string;
 }
