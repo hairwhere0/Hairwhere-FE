@@ -967,7 +967,7 @@ export const handlers = [
               hairColor: "레드와인",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -988,7 +988,7 @@ export const handlers = [
               hairColor: "블랙",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1009,7 +1009,7 @@ export const handlers = [
               hairColor: "브라운",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1030,7 +1030,7 @@ export const handlers = [
               hairColor: "탈색",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1051,7 +1051,7 @@ export const handlers = [
               hairColor: "레드와인",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1072,7 +1072,7 @@ export const handlers = [
               hairColor: "레드와인",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1093,7 +1093,7 @@ export const handlers = [
               hairColor: "레드와인",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1114,7 +1114,7 @@ export const handlers = [
               hairColor: "레드와인",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1135,7 +1135,7 @@ export const handlers = [
               hairColor: "레드와인",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
             {
               id: generateId(),
@@ -1156,7 +1156,7 @@ export const handlers = [
               hairColor: "레드와인",
               kakaoId: generateId()+1,
               userProfilePath: faker.image.avatar(),
-              likedNickNames: [],
+              likedNickNames: ["김산호"],
             },
           ]
         }
