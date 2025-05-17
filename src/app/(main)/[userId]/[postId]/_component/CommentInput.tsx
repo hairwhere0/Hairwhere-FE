@@ -61,7 +61,7 @@ export default function CommentInput({postId}: Props) {
     },
     onSuccess() {
       setText('');
-      queryClient.invalidateQueries({queryKey: ['comments', postId]});
+      // queryClient.invalidateQueries({queryKey: ['comments', postId]});
     },
     onError: (error) => {
       console.error("Error adding comment:", error);

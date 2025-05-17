@@ -1632,58 +1632,112 @@ export const handlers = [
       })
     )
   }),
-  http.get(`/comment/getComments/:photoId`, async ({ request }) => {
+  http.get(`/comment/getComments/:photoId`, async ({ request, params }) => {
+    const { parentId } = params;
     const url = new URL(request.url);
     const photoId = parseInt(url.searchParams.get('photoId') as string) || 0;
-    return new HttpResponse(
-      JSON.stringify({
-        code: "SUCCESS",
-        message: "성공",
-        result: [
-          {
-            id: generateId(),
-            content: "너무 예뻐요",
-            createdAt: new Date(),
-            user: {
+    if(!parentId) {
+      return new HttpResponse(
+        JSON.stringify({
+          code: "SUCCESS",
+          message: "성공",
+          result: [
+            {
               id: generateId(),
-              kakaoId: generateId(),
-              nickName: "멋진 사람",
-              profileImagePath: faker.image.avatar()
+              content: "너무 예뻐요",
+              createdAt: new Date(),
+              user: {
+                id: generateId(),
+                kakaoId: generateId(),
+                nickName: "멋진 사람",
+                profileImagePath: faker.image.avatar()
+              },
+              photoId: photoId,
+              parentId: 0,
+              replies: [],
             },
-            photoId: photoId,
-            parentId: 0,
-            replies: [],
-          },
-          {
-            id: generateId(),
-            content: "우와~~~~",
-            createdAt: new Date(),
-            user: {
+            {
               id: generateId(),
-              kakaoId: generateId(),
-              nickName: "지나가던 사람",
-              profileImagePath: faker.image.avatar()
+              content: "우와~~~~",
+              createdAt: new Date(),
+              user: {
+                id: generateId(),
+                kakaoId: generateId(),
+                nickName: "지나가던 사람",
+                profileImagePath: faker.image.avatar()
+              },
+              photoId: photoId,
+              parentId: 0,
+              replies: [],
             },
-            photoId: photoId,
-            parentId: 0,
-            replies: [],
-          },
-          {
-            id: generateId(),
-            content: "대박",
-            createdAt: new Date(),
-            user: {
+            {
               id: generateId(),
-              kakaoId: generateId(),
-              nickName: "예쁜 사람",
-              profileImagePath: faker.image.avatar()
+              content: "대박",
+              createdAt: new Date(),
+              user: {
+                id: generateId(),
+                kakaoId: generateId(),
+                nickName: "예쁜 사람",
+                profileImagePath: faker.image.avatar()
+              },
+              photoId: photoId,
+              parentId: 0,
+              replies: [],
             },
-            photoId: photoId,
-            parentId: 0,
-            replies: [],
-          },
-        ]
-      })
-    )
-  })
+          ]
+        })
+      )
+    } else {
+      return new HttpResponse(
+        JSON.stringify({
+          code: "SUCCESS",
+          message: "성공",
+          result: [
+            {
+              id: generateId(),
+              content: "너무 예뻐요",
+              createdAt: new Date(),
+              user: {
+                id: generateId(),
+                kakaoId: generateId(),
+                nickName: "멋진 사람",
+                profileImagePath: faker.image.avatar()
+              },
+              photoId: photoId,
+              parentId: parentId,
+              replies: [],
+            },
+            {
+              id: generateId(),
+              content: "우와~~~~",
+              createdAt: new Date(),
+              user: {
+                id: generateId(),
+                kakaoId: generateId(),
+                nickName: "지나가던 사람",
+                profileImagePath: faker.image.avatar()
+              },
+              photoId: photoId,
+              parentId: parentId,
+              replies: [],
+            },
+            {
+              id: generateId(),
+              content: "대박",
+              createdAt: new Date(),
+              user: {
+                id: generateId(),
+                kakaoId: generateId(),
+                nickName: "예쁜 사람",
+                profileImagePath: faker.image.avatar()
+              },
+              photoId: photoId,
+              parentId: parentId,
+              replies: [],
+            },
+          ]
+        })
+      )
+    }
+  }),
 ]
