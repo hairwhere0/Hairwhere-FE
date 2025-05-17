@@ -43,6 +43,7 @@ export default function CommentInput({postId}: Props) {
           const shallow = value ? [...value] : [];
           const newComment:Comment = {
             id: shallow.length === 0 ? 1: shallow[shallow.length-1].id + 1,
+            photoId: Number(postId),
             content: text,
             user: {
               id: myId || '',

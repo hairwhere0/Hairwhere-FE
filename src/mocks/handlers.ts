@@ -1632,4 +1632,58 @@ export const handlers = [
       })
     )
   }),
+  http.get(`/comment/getComments/:photoId`, async ({ request }) => {
+    const url = new URL(request.url);
+    const photoId = parseInt(url.searchParams.get('photoId') as string) || 0;
+    return new HttpResponse(
+      JSON.stringify({
+        code: "SUCCESS",
+        message: "성공",
+        result: [
+          {
+            id: generateId(),
+            content: "너무 예뻐요",
+            createdAt: new Date(),
+            user: {
+              id: generateId(),
+              kakaoId: generateId(),
+              nickName: "멋진 사람",
+              profileImagePath: faker.image.avatar()
+            },
+            photoId: photoId,
+            parentId: 0,
+            replies: [],
+          },
+          {
+            id: generateId(),
+            content: "우와~~~~",
+            createdAt: new Date(),
+            user: {
+              id: generateId(),
+              kakaoId: generateId(),
+              nickName: "지나가던 사람",
+              profileImagePath: faker.image.avatar()
+            },
+            photoId: photoId,
+            parentId: 0,
+            replies: [],
+          },
+          {
+            id: generateId(),
+            content: "대박",
+            createdAt: new Date(),
+            user: {
+              id: generateId(),
+              kakaoId: generateId(),
+              nickName: "예쁜 사람",
+              profileImagePath: faker.image.avatar()
+            },
+            photoId: photoId,
+            parentId: 0,
+            replies: [],
+          },
+        ]
+      })
+    )
+  })
 ]
