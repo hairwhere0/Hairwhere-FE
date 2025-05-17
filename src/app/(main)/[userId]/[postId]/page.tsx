@@ -2,7 +2,7 @@ import style from './postPage.module.css';
 import SinglePost from './_component/SinglePost';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { getSinglePost } from './_lib/getSinglePost';
-// import CommentInput from './_component/CommentInput';
+import CommentInput from './_component/CommentInput';
 // import Comments from './_component/Comments';
 // import { getComments } from './_lib/getComments';
 
@@ -25,8 +25,8 @@ export default async function PostPage({params}: Props) {
     <div className={style.main}>
       <HydrationBoundary state={dehydratedState}>
         <SinglePost postId={postId}/>
-        {/* <CommentInput id={id} />
-        <Comments id={id}/> */}
+        <CommentInput postId={postId} />
+        {/* <Comments postId={postId}/> */}
       </HydrationBoundary>
     </div>
   );

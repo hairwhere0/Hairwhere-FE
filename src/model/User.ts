@@ -1,6 +1,6 @@
 export interface User {
   id: string;
-  kakaoId: number;
+  kakaoId: number | string;
   nickName: string;
   profileImagePath: string;
 }
