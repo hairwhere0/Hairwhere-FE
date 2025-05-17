@@ -4,7 +4,7 @@ import style from './recomment.module.css'
 import { useStore } from '@/store/store';
 import { Avatar } from 'antd';
 import Recomments from './Recomments';
-// import RecommentInput from './RecommentInput';
+import RecommentInput from './RecommentInput';
 import { useRouter } from 'next/navigation';
 
 export default function RecommentModal() {
@@ -42,7 +42,7 @@ export default function RecommentModal() {
         <div className={style.recommentsWrapper}>
           <Recomments postId={photoId as string} parentId={recomment?.id ? recomment.id.toString() : 'defaultId'}/>
         </div>
-        {/* <RecommentInput id={photoId as string} parentId={recomment?.id ? recomment.id.toString() : 'defaultId'}/> */}
+        <RecommentInput postId={photoId as string} parentId={recomment?.id ? recomment.id.toString() : 'defaultId'}/>
       </div>
     </div>
   )

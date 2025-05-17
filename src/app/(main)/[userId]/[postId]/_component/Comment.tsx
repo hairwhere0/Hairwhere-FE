@@ -34,6 +34,7 @@ export default function Comment({comment, postId}: Props) {
 
   const deleteComment = useMutation({
     mutationFn: () => {
+      console.log("deleteComment");
       return fetch(`/comment/deleteComment/${comment.id}`, {
         method: 'DELETE',
         credentials: 'include',
@@ -64,6 +65,7 @@ export default function Comment({comment, postId}: Props) {
 
   const deleteRecomment = useMutation({
     mutationFn: () => {
+      console.log("deleteRecomment");
       return fetch(`/comment/deleteComment/${comment.id}`, {
         method: 'DELETE',
         credentials: 'include',
@@ -79,10 +81,8 @@ export default function Comment({comment, postId}: Props) {
         if(queryKey[0] === "recomment" && queryKey[1] === postId && queryKey[2] === comment.parentId) {
           const value: IComment[] | undefined = queryClient.getQueryData(queryKey);
           const shallow = value ? [...value] : [];
-          console.log(shallow);
-          shallow.filter((c) => c.id !== comment.id);
-          console.log(shallow);
-          queryClient.setQueryData(queryKey, shallow);
+          const filtered = shallow.filter((c) => c.id !== comment.id);
+          queryClient.setQueryData(queryKey, filtered);
         }
       })
     },
@@ -95,12 +95,11 @@ export default function Comment({comment, postId}: Props) {
   })
 
   const onDeleteComment = () => {
-    // if(window.location.pathname === "/recomment") {
-    //   deleteRecomment.mutate();
-    // } else {
-    //   deleteComment.mutate();
-    // }
-    deleteComment.mutate();
+    if(window.location.pathname === "/recomment") {
+      deleteRecomment.mutate();
+    } else {
+      deleteComment.mutate();
+    }
   }
 
   return (
