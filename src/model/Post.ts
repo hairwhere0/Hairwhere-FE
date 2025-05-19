@@ -1,6 +1,6 @@
 export interface Post {
   id: number;
-  nickname: string;
+  nickName: string;
   photoImagePath: string[];
   likeCount:number;
   hairName: string;
@@ -12,6 +12,6 @@ export interface Post {
   hairLength: string;
   hairColor:string;
   kakaoId: number;
-  userProfilePath: string;
+  profileImagePath: string;
   likedNickNames: string[];
 }

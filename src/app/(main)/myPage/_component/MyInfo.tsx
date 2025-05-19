@@ -15,7 +15,7 @@ export default function MyInfo() {
     setImage: state.setImage
   }));
   const myName = localStorage.getItem("nickName");
-  const myProfile = localStorage.getItem("profileImageUrl");
+  const myProfile = localStorage.getItem("profileImagePath");
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editName, setEditName] = useState<string>('');
   const [editImage, setEditImage] = useState<File | null>(null);

@@ -18,6 +18,7 @@ export default function LoginButton() {
     localStorage.removeItem('kakaoId');
     localStorage.removeItem('nickName');
     localStorage.removeItem('profileImageUrl');
+    setAccessToken('');
     document.cookie = `accessToken=; path=/; max-age=0`;
     router.replace('/');
   };

@@ -6,6 +6,8 @@ import { ChangeEventHandler, FormEvent, useEffect, useRef} from "react";
 import {useMutation} from "@tanstack/react-query";
 import { useStore } from "@/store/store";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { authApi } from "../../_lib/axios";
 
 type Props = {
   params?: { sn: string, sa: string };
@@ -56,21 +58,12 @@ export default function PostBody({params}: Props) {
       formData.append('hairSalonAddress', shopAddress);
       formData.append('createdStr', new Date().toISOString().split('.')[0]);
       
-      const response = await fetch(`/photo/upload`, {
-        method: 'POST',
-        credentials: 'include',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
-      }
+      const response = await authApi.post(`/photo/upload`, formData);
   
-      return response;
+      return response.data;
 
     },
-    async onSuccess(response) {
-      const responseData = await response.json();
+    async onSuccess(responseData) {
       setText('');
       setPreview([]);
       setPostHairName('');
@@ -80,12 +73,13 @@ export default function PostBody({params}: Props) {
       setShop('');
       setShopAddress('');
 
+      console.log("응답값: ",responseData);
       router.push('/');
 
       // 경로가 '/'로 변경된 후 상세 페이지로 이동
       const checkRouteChange = () => {
         if (window.location.pathname === '/') {
-          router.push(`/${responseData.user.name}/${responseData.id}`);
+          router.push(`/${responseData.kakaoId}/${responseData.id}`);
         } else {
           // 경로가 '/'가 아니라면 재시도
           setTimeout(checkRouteChange, 100);

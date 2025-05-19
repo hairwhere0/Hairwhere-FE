@@ -1,15 +1,9 @@
+import { User } from "@/model/User";
 import { authApi } from "../../_lib/axios";
-
-type MyInfo = {
-  id: number;
-  kakaoId: number;
-  nickName: string;
-  profileImageUrl: string;
-}
 
 export const getMyInfo = async () => {
   try {
-    const response = await authApi.get<MyInfo>(`/kakao/mypage`);
+    const response = await authApi.get<User>(`/kakao/mypage`);
 
     const myInfo = response.data;
 
@@ -17,7 +11,7 @@ export const getMyInfo = async () => {
       localStorage.setItem('id', myInfo.id.toString());
       localStorage.setItem('kakaoId', myInfo.kakaoId.toString());
       localStorage.setItem('nickName', myInfo.nickName);
-      localStorage.setItem('profileImageUrl', myInfo.profileImageUrl);
+      localStorage.setItem('profileImageUrl', myInfo.profileImagePath);
     }
   } catch(err) {
     console.log(err);

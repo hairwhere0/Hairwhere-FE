@@ -43,6 +43,8 @@ export default function SinglePost({postId}: Props) {
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
   });
+
+  console.log("post: ", post);
   if (error) {
     <div style={{
       height: 100,
@@ -84,11 +86,11 @@ export default function SinglePost({postId}: Props) {
       {post.kakaoId && (
       <div className={style.userBadge}>
         <Link href={`/${post.kakaoId}`}>
-          {post.userProfilePath === '' ?
+          {post.profileImagePath === '' ?
             <Avatar size={44} icon={<UserOutlined/>} /> :
-            <Avatar size={44} src={post.userProfilePath} />
+            <Avatar size={44} src={post.profileImagePath} />
           }
-          <div className={style.userName}>{post.nickname}</div>
+          <div className={style.userName}>{post.nickName}</div>
         </Link>
       </div>
       )}

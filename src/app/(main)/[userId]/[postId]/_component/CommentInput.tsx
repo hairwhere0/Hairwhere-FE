@@ -16,7 +16,7 @@ export default function CommentInput({postId}: Props) {
   const myId = localStorage.getItem("id");
   const myKakaoId = localStorage.getItem("kakaoId");
   const myName = localStorage.getItem("nickName");
-  const myProfile = localStorage.getItem("profileImageUrl");
+  const myProfile = localStorage.getItem("profileImagePath");
   const queryClient = useQueryClient();
   const [text, setText] = useState<string>("");
   const router = useRouter();

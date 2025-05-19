@@ -6,6 +6,7 @@ import style from './header.module.css';
 import { useRouter } from 'next/navigation';
 import { Post as IPost } from '@/model/Post';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { authApi } from '@/app/(main)/_lib/axios';
 
 type Props = {
   post: IPost;
@@ -28,16 +29,13 @@ export default function Header({ post }: Props) {
 
   const heart = useMutation({
     mutationFn: () => {
-      return fetch(`/like/${post.id}`, {
-        method: 'post',
-        credentials: 'include',
-      })
+      return authApi.post(`/like/${post.id}`);
     },
     onMutate() {
       const queryCache = queryClient.getQueryCache(); //react query dev tools에서 볼 수 있는 값들
       const queryKeys = queryCache.getAll().map(cache => cache.queryKey); //query key들을 전부 가져온다.
       queryKeys.forEach((queryKey) => {
-        if(queryKey[0] === "post") {
+        if(queryKey[0] === "post" && queryKey[1] === String(post.id)) {
           const value: IPost | undefined = queryClient.getQueryData(queryKey);
           if (value) {
             if(value.id === post.id) {
@@ -56,16 +54,13 @@ export default function Header({ post }: Props) {
 
   const unHeart = useMutation({
     mutationFn: () => {
-      return fetch(`/like/${post.id}`, {
-        method: 'post',
-        credentials: 'include',
-      })
+      return authApi.post(`/like/${post.id}`);
     },
     onMutate() {
       const queryCache = queryClient.getQueryCache(); //react query dev tools에서 볼 수 있는 값들
       const queryKeys = queryCache.getAll().map(cache => cache.queryKey); //query key들을 전부 가져온다.
       queryKeys.forEach((queryKey) => {
-        if(queryKey[0] === "post") {
+        if(queryKey[0] === "post" && queryKey[1] === String(post.id)) {
           const value: IPost | undefined = queryClient.getQueryData(queryKey);
           if (value) {
             if(value.id === post.id) {

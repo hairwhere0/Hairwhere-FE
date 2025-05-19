@@ -21,14 +21,14 @@
 } */
 
 .modal {
-  background-color: rgb(var(--background-end-rgb));
-  border-radius: 16px;
   position: relative;
   top: 0%;
+  bottom: 0%;
   width: 50vw;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  height: auto;
+  overflow-y: hidden;
   z-index: 99;
 }
 

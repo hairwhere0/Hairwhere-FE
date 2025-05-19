@@ -10,6 +10,7 @@ import { PageInfo } from '@/model/PageInfo';
 import {MouseEventHandler, useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+import { authApi } from '../_lib/axios';
 
 type Props = {
   post: Post,
@@ -31,10 +32,7 @@ export default function Post({ post }: Props) {
 
   const heart = useMutation({
     mutationFn: () => {
-      return fetch(`/like/${post.id}`, {
-        method: 'post',
-        credentials: 'include',
-      })
+      return authApi.post(`/like/${post.id}`);
     },
     onMutate() {
       const queryCache = queryClient.getQueryCache(); //react query dev tools에서 볼 수 있는 값들
@@ -79,10 +77,7 @@ export default function Post({ post }: Props) {
 
   const unHeart = useMutation({
     mutationFn: () => {
-      return fetch(`/like/${post.id}`, {
-        method: 'post',
-        credentials: 'include',
-      })
+      return authApi.post(`/like/${post.id}`);
     },
     onMutate() {
       const queryCache = queryClient.getQueryCache(); //react query dev tools에서 볼 수 있는 값들
