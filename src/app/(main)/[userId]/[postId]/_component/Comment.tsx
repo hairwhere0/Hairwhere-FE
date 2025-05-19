@@ -62,19 +62,13 @@ export default function Comment({comment, postId}: Props) {
   const deleteRecomment = useMutation({
     mutationFn: () => {
       console.log("deleteRecomment");
-      return fetch(`/comment/deleteComment/${comment.id}`, {
-        method: 'DELETE',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
+      return authApi.delete(`/comment/deleteComment/${comment.id}`);
     },
     onMutate() {
       const queryCache = queryClient.getQueryCache();
       const queryKeys = queryCache.getAll().map(cache => cache.queryKey);
       queryKeys.forEach((queryKey) => {
-        if(queryKey[0] === "recomment" && queryKey[1] === postId && queryKey[2] === comment.parentId) {
+        if(queryKey[0] === "recomment" && queryKey[1] === String(postId) && queryKey[2] === String(comment.parentId)) {
           const value: IComment[] | undefined = queryClient.getQueryData(queryKey);
           const shallow = value ? [...value] : [];
           const filtered = shallow.filter((c) => c.id !== comment.id);
