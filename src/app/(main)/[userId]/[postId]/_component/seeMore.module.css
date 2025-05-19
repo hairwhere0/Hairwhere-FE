@@ -1,3 +1,4 @@
+/* 기존 alert-dialog 스타일 */
 .alert-dialog-content {
   position: fixed;
   top: 50%;
@@ -42,6 +43,124 @@
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 999;
+}
+
+/* 새로 추가된 신고 모달 스타일 */
+.report-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+.report-dialog-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 500px;
+  width: 90%;
+}
+
+.report-dialog-content h2 {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.report-dialog-content p {
+  margin-bottom: 16px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.report-dialog-body {
+  margin-bottom: 24px;
+}
+
+.report-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.report-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.report-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.report-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* 공통 버튼 스타일 */
+.btn-cancel {
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background-color: #f9fafb;
+}
+
+.btn-delete {
+  padding: 8px 16px;
+  border: 1px solid #dc2626;
+  background-color: #dc2626;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #b91c1c;
+}
+
+.btn-report {
+  padding: 8px 16px;
+  border: 1px solid #dc2626;
+  background-color: #dc2626;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-report:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.btn-report:disabled {
+  background-color: #9ca3af;
+  border-color: #9ca3af;
+  cursor: not-allowed;
 }
 
 .btn-cancel {

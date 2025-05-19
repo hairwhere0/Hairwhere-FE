@@ -8,14 +8,18 @@ import { Dropdown, Space } from 'antd';
 import style from './seeMore.module.css';
 import { Post } from '@/model/Post';
 import { useRouter } from "next/navigation";
+import { authApi } from '@/app/(main)/_lib/axios';
+import { response } from 'express';
 
 type Props = {
   post: Post
 }
 
 export default function SeeMore({ post }: Props) {
-  // const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const [reportContent, setReportContent] = useState('');
+  const kakaoId = localStorage.getItem("kakaoId");
   const router = useRouter();
   
   const copyToClipboard = () => {
@@ -39,10 +43,17 @@ export default function SeeMore({ post }: Props) {
       ),
       key: '0',
     },
-    // {
-    //   label: "신고하기",
-    //   key: '1',
-    // },
+    {
+      label: (
+        <span
+          style={{color: '#dc2626'}}
+          onClick={() => setIsReportOpen(true)} // Open dialog on click
+        >
+          신고하기
+        </span>
+      ),
+      key: '1',
+    },
   ];
 
   const loginItems = [
@@ -69,16 +80,7 @@ export default function SeeMore({ post }: Props) {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const response = await fetch(`/photo/delete/${post.id}`, {
-        method: 'delete',
-        credentials: 'include',
-      });
-
-      if(!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
-      }
-
-      return response;
+      return authApi.delete(`/photo/delete/${post.id}`);
     },
     async onSuccess() {
       router.push('/');
@@ -92,14 +94,43 @@ export default function SeeMore({ post }: Props) {
     }
   })
 
+  const reportMutation = useMutation({
+    mutationFn: async (content: string) => {
+      return authApi.post(`/report/${post.id}`, {
+        reason: content,
+      })
+    },
+    onSuccess() {
+      alert("신고가 접수되었습니다.");
+      setIsReportOpen(false);
+      setReportContent('');
+    },
+    onError(error) {
+      console.error(error);
+      alert("신고 중 에러가 발생했습니다.");
+    }
+  })
+
   const onDeletePost = () => {
     mutation.mutate();
   }
 
+  const onReportPost = () => {
+    if (!reportContent.trim()) {
+      alert("신고 내용을 입력해주세요.");
+      return;
+    }
+    reportMutation.mutate(reportContent);
+  }
+
+  const handleReportClose = () => {
+    setIsReportOpen(false);
+    setReportContent('');
+  }
+
   return (
     <>
-      {/* <Dropdown menu={{ items: post.kakaoId ===  session?.user?.name ? loginItems : items }} trigger={['click']}> */}
-      <Dropdown menu={{ items: true ? loginItems : items }} trigger={['click']}>
+      <Dropdown menu={{ items: post.kakaoId ===  Number(kakaoId) ? loginItems : items }} trigger={['click']}>
         <a onClick={(e) => e.preventDefault()}>
           <Space>
             <MoreOutlined />
@@ -129,8 +160,42 @@ export default function SeeMore({ post }: Props) {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* 오버레이 */}
+      {/* 삭제 오버레이 */}
       {isOpen && <div className={style['alert-dialog-overlay']} onClick={() => setIsOpen(false)} />}
+      
+      {/* 신고 모달 */}
+      {isReportOpen && (
+        <>
+          <div className={style['report-dialog-overlay']} onClick={handleReportClose} />
+          <div className={style['report-dialog-content']}>
+            <div>
+              <h2>신고하기</h2>
+              <p>신고 사유를 자세히 입력해주세요.</p>
+            </div>
+            <div className={style['report-dialog-body']}>
+              <textarea
+                className={style['report-textarea']}
+                placeholder="신고 내용을 입력해주세요..."
+                value={reportContent}
+                onChange={(e) => setReportContent(e.target.value)}
+                rows={4}
+              />
+            </div>
+            <div className={style['report-dialog-footer']}>
+              <button className={style['btn-cancel']} onClick={handleReportClose}>
+                취소
+              </button>
+              <button 
+                className={style['btn-report']} 
+                onClick={onReportPost}
+                disabled={reportMutation.isPending}
+              >
+                {reportMutation.isPending ? '신고 중...' : '신고하기'}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
