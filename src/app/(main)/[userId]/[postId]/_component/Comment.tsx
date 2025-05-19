@@ -8,6 +8,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { useStore } from '@/store/store';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { authApi } from '@/app/(main)/_lib/axios';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime)
@@ -35,13 +36,7 @@ export default function Comment({comment, postId}: Props) {
   const deleteComment = useMutation({
     mutationFn: () => {
       console.log("deleteComment");
-      return fetch(`/comment/deleteComment/${comment.id}`, {
-        method: 'DELETE',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
+      return authApi.delete(`/comment/deleteComment/${comment.id}`);
     },
     onMutate() {
       const queryCache = queryClient.getQueryCache();
@@ -50,13 +45,14 @@ export default function Comment({comment, postId}: Props) {
         if(queryKey[0] === "comments" && queryKey[1] === postId) {
           const value: IComment[] | undefined = queryClient.getQueryData(queryKey);
           const shallow = value ? [...value] : [];
-          shallow.filter((c) => c.id !== comment.id);
-          queryClient.setQueryData(queryKey, shallow);
+          const filtered = shallow.filter((c) => c.id !== comment.id);
+          console.log("shallow: ", filtered);
+          queryClient.setQueryData(queryKey, filtered);
         }
       })
     },
     onSuccess() {
-      queryClient.invalidateQueries({queryKey: ['comments', postId]});
+      console.log("삭제 성공")
     },
     onError: (error) => {
       console.error("Error deleting comment:", error);
@@ -120,7 +116,7 @@ export default function Comment({comment, postId}: Props) {
               }
             </span>
             <span className={style.delete} onClick={() => onDeleteComment()}>
-              {comment.user.id === myId ?
+              {comment.user.id == myId ?
                 "삭제하기":
                 <></>}
             </span>

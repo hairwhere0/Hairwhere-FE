@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {useRouter} from "next/navigation";
 import { Comment } from '@/model/Comment';
+import { authApi } from '@/app/(main)/_lib/axios';
 
 type Props = {
   postId: string
@@ -23,15 +24,8 @@ export default function CommentInput({postId}: Props) {
 
   const addComment = useMutation({
     mutationFn: () => {
-      return fetch(`/comment/${postId}`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          content: text
-        }),
+      return authApi.post(`/comment/${postId}`, {
+        content: text
       })
     }, 
     onMutate() {
@@ -59,9 +53,27 @@ export default function CommentInput({postId}: Props) {
         }
       })
     },
-    onSuccess() {
+    onSuccess(responseData) {
       setText('');
-      // queryClient.invalidateQueries({queryKey: ['comments', postId]});
+      console.log("댓글 달기 성공: ", responseData);
+      const queryCache = queryClient.getQueryCache();
+      const queryKeys = queryCache.getAll().map(cache => cache.queryKey);
+      queryKeys.forEach((queryKey) => {
+        if(queryKey[0] === "comments" && queryKey[1] === postId) {
+          const value: Comment[] | undefined = queryClient.getQueryData(queryKey);
+          if (value) {
+            const shallow = [...value];
+            // 첫 번째 댓글(방금 추가한 임시 댓글)의 id를 서버 응답의 id로 교체
+            if (shallow.length > 0) {
+              shallow[0] = {
+                ...shallow[0],
+                id: responseData.data.id // 또는 responseData.id (서버 응답 구조에 따라)
+              };
+            }
+            queryClient.setQueryData(queryKey, shallow);
+          }
+        }
+      })
     },
     onError: (error) => {
       console.error("Error adding comment:", error);
