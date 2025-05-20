@@ -10,13 +10,15 @@ export const getSearchResult: QueryFunction<PageInfo, [_1: string, _2: string, {
     // const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/photo/search/?page=${pageParam}&size=15&hairName=${searchParams.hairName}&gender=${searchParams.gender}&hairLength=${searchParams.hairLength}&hairColor=${searchParams.hairColor}`);
     // return response.data.result;
 
-    const response = await axios.get(`/photo/search/`,{
-      params: {
-        page: pageParam,
-        size: 15,
-        ...searchParams,
-      }
-    });
+    // const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/photo/search/`,{
+    //   params: {
+    //     page: pageParam,
+    //     size: 15,
+    //     searchParams: searchParams,
+    //   }
+    // });
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/photo/search?page=${pageParam}&size=15&hairName=${searchParams.hairName}&gender=${searchParams.gender}&hairLength=${searchParams.hairLength}&hairColor=${searchParams.hairColor}`);
+
     console.log('검색 데이터:', response.data);
     return response.data;
   } catch (error) {
