@@ -6,6 +6,7 @@ import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useState, useRef} from "react";
 import { useStore } from "@/store/store";
+import { authApi } from '../../_lib/axios';
 
 export default function MyInfo() {
   const { name, setName, image, setImage } = useStore((state) => ({
@@ -47,66 +48,48 @@ export default function MyInfo() {
       
       if(editName !== "" && editImage !== null) {
         const formData = new FormData();
-        formData.append('profile', editImage);
-        formData.append('name', editName);
-        const res = await fetch(`/update/user`, {
-          method: 'PATCH',
-          credentials: 'include',
-          body: formData
+        formData.append('image', editImage);
+        const profileRes = await authApi.put(`/kakao/updateProfile`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         });
-        if (!res.ok) {
-          const errorData = await res.json();
-          console.error("서버 오류 메시지:", errorData.message || errorData);
+        const nickNameRes = await authApi.put(`/kakao/updateNickname?nickName=${editName}`);
+        if (profileRes.status !== 200 || nickNameRes.status !== 200) {
           alert("프로필 변경에 실패했습니다.");
         } else {
-          const data = await res.json(); // 서버 응답에서 이미지 URL 가져오기
-          setImage(editImage);
+          console.log("프로필 데이터: ", profileRes);
+          const profileData = profileRes.data.image; // 서버 응답에서 이미지 URL 가져오기
+          setImage(profileData.data.image);
           setName(editName);
           
           // localStorage 업데이트
           localStorage.setItem("nickName", editName);
-          
-          // 서버 응답에 이미지 URL이 포함되어 있다고 가정
-          if (data && data.profileImageUrl) {
-            updatedImageUrl = data.profileImageUrl;
-            localStorage.setItem("profileImageUrl", updatedImageUrl);
-          }
+          localStorage.setItem("profileImagePath", profileRes.data.image);
         }
       }
       else if(editImage !== null) {
         const formData = new FormData();
-        formData.append('profile', editImage);
-        const res = await fetch(`/update/user`, {
-          method: 'PATCH',
-          credentials: 'include',
-          body: formData
+        formData.append('image', editImage);
+        const profileRes = await authApi.put(`/kakao/updateProfile`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         });
-        if (!res.ok) {
-          const errorData = await res.json();
-          console.error("서버 오류 메시지:", errorData.message || errorData);
+        if (profileRes.status !== 200) {
           alert("프로필 사진 변경에 실패했습니다.");
         } else {
-          const data = await res.json(); // 서버 응답에서 이미지 URL 가져오기
-          setImage(editImage);
+          console.log("프로필 데이터: ", profileRes);
+          const profileData = profileRes.data.image; // 서버 응답에서 이미지 URL 가져오기
+          setImage(profileData.data.image);
           
-          // 서버 응답에 이미지 URL이 포함되어 있다고 가정
-          if (data && data.profileImageUrl) {
-            updatedImageUrl = data.profileImageUrl;
-            localStorage.setItem("profileImageUrl", updatedImageUrl);
-          }
+          // localStorage 업데이트
+          localStorage.setItem("profileImagePath", profileRes.data.image);
         }
       }
       else if(editName !== "") {
-        const formData = new FormData();
-        formData.append('name', editName);
-        const res = await fetch(`/update/user`, {
-          method: 'PATCH',
-          credentials: 'include',
-          body: formData
-        });
-        if (!res.ok) {
-          const errorData = await res.json();
-          console.error("서버 오류 메시지:", errorData.message || errorData);
+        const nickNameRes = await authApi.put(`/kakao/updateNickname?nickName=${editName}`);
+        if (nickNameRes.status !== 200) {
           alert("닉네임 변경에 실패했습니다.");
         } else {
           setName(editName);
