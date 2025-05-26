@@ -1,6 +1,6 @@
 "use client"
 
-import style from "./navMenu.module.css"
+import style from "./NavMenu.module.css"
 import { useSelectedLayoutSegment } from "next/navigation"
 import Link from "next/link"
 
