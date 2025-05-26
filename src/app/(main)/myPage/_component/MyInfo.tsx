@@ -4,19 +4,25 @@ import MyPosts from './MyPosts';
 import style from './myInfo.module.css';
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { useState, useRef} from "react";
+import { useState, useRef, useEffect} from "react";
 import { useStore } from "@/store/store";
 import { authApi } from '../../_lib/axios';
 
 export default function MyInfo() {
+  const [myName, setMyName] = useState<string | null>(null);
+  const [myProfile, setMyProfile] = useState<string | null>(null);
+  
+  useEffect(() => {
+    setMyName(localStorage.getItem("nickName"));
+    setMyProfile(localStorage.getItem("profileImagePath"));
+  }, []);
+
   const { name, setName, image, setImage } = useStore((state) => ({
     name: state.name,
     setName: state.setName,
     image: state.image,
     setImage: state.setImage
   }));
-  const myName = localStorage.getItem("nickName");
-  const myProfile = localStorage.getItem("profileImagePath");
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editName, setEditName] = useState<string>('');
   const [editImage, setEditImage] = useState<File | null>(null);
@@ -59,13 +65,13 @@ export default function MyInfo() {
           alert("프로필 변경에 실패했습니다.");
         } else {
           console.log("프로필 데이터: ", profileRes);
-          const profileData = profileRes.data.image; // 서버 응답에서 이미지 URL 가져오기
-          setImage(profileData.data.image);
+          const profileData = profileRes.data; // 서버 응답에서 이미지 URL 가져오기
+          setImage(profileData.data);
           setName(editName);
           
           // localStorage 업데이트
           localStorage.setItem("nickName", editName);
-          localStorage.setItem("profileImagePath", profileRes.data.image);
+          localStorage.setItem("profileImagePath", profileRes.data);
         }
       }
       else if(editImage !== null) {
@@ -80,11 +86,12 @@ export default function MyInfo() {
           alert("프로필 사진 변경에 실패했습니다.");
         } else {
           console.log("프로필 데이터: ", profileRes);
-          const profileData = profileRes.data.image; // 서버 응답에서 이미지 URL 가져오기
-          setImage(profileData.data.image);
+          const profileData = profileRes.data; // 서버 응답에서 이미지 URL 가져오기
           
           // localStorage 업데이트
-          localStorage.setItem("profileImagePath", profileRes.data.image);
+          setImage(profileData.data);
+          setMyProfile(profileRes.data);
+          localStorage.setItem("profileImagePath", profileRes.data);
         }
       }
       else if(editName !== "") {

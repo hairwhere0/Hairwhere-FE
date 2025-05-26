@@ -1,11 +1,7 @@
-"use client"
-
 import style from './likesPage.module.css';
 import LikePosts from './_component/LikePosts';
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-export default function LikesPage() {
-
+export default async function LikesPage() {
   return (
     <>
       <div className={style.main}>

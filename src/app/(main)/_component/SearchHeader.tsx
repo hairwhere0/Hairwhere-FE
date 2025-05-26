@@ -7,6 +7,7 @@ import HairCategoryMenu from './HairCategoryMenu';
 import { useStore } from "@/store/store";
 
 export default function SearchHeader() {
+  const searchParams = useSearchParams();
   const { hairName, setHairName, gender, hairLength, hairColor, selectedKeys } = useStore((state) => ({
     hairName: state.hairName,
     setHairName: state.setHairName,
@@ -17,7 +18,6 @@ export default function SearchHeader() {
   }))
   const [categoryVisible, setCategoryVisible] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     const searchedHairName = searchParams.get('hairName');

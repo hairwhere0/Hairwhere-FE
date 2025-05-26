@@ -1,13 +1,16 @@
-"use client"
-
 import style from "@/app/(main)/post/postPage.module.css";
 import PostBody from "./_component/PostBody";
-import { useSearchParams } from "next/navigation";
 
-export default function PostPage() {
-  const searchParams = useSearchParams();
-  const sn = searchParams.get('sn');
-  const sa = searchParams.get('sa');
+type Props = {
+  searchParams: {
+    sn: string,
+    sa: string,
+  }
+}
+
+export default function PostPage({ searchParams }: Props) {
+  const sn = searchParams?.sn;
+  const sa = searchParams?.sa;
 
   const params = (sn && sa) ? {sn, sa} : undefined;
   
@@ -20,4 +23,3 @@ export default function PostPage() {
     </div>
   );
 }
-

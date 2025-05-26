@@ -3,7 +3,7 @@
 import style from './recommentInput.module.css';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {useRouter} from "next/navigation";
 import { Comment } from '@/model/Comment';
@@ -15,10 +15,19 @@ type Props = {
 }
 
 export default function RecommentInput({postId, parentId}: Props) {
-  const myId = localStorage.getItem("id");
-  const myKakaoId = localStorage.getItem("kakaoId");
-  const myName = localStorage.getItem("nickName");
-  const myProfile = localStorage.getItem("profileImagePath");
+  const [myId, setMyId] = useState<string | null>(null);
+  const [myKakaoId, setMyKakaoId] = useState<string | null>(null);
+  const [myName, setMyName] = useState<string | null>(null);
+  const [myProfile, setMyProfile] = useState<string | null>(null);
+  
+  useEffect(() => {
+    // 클라이언트에서만 localStorage에 접근
+    setMyId(localStorage.getItem("id"));
+    setMyKakaoId(localStorage.getItem("kakaoId"));
+    setMyName(localStorage.getItem("nickName"));
+    setMyProfile(localStorage.getItem("profileImagePath"));
+  }, []);
+  
   const queryClient = useQueryClient();
   const [text, setText] = useState<string>("");
   const router = useRouter();
