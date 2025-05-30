@@ -1,5 +1,5 @@
 import { User } from "@/model/User";
-import { authApi } from "../../_lib/axios";
+import { authApi } from "../../../_lib/axios";
 
 export const getMyInfo = async () => {
   try {

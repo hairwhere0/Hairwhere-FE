@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
-import LoadingSpinner from "../_component/LoadingSpinner";
+import LoadingSpinner from "../../_component/LoadingSpinner";
 import style from "./oauthPage.module.css";
 import { useRouter } from "next/navigation";
 import { getToken } from "./_lib/getToken";
