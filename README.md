@@ -127,25 +127,14 @@
 
 <br>
 
-### [회원가입]
+### [회원가입/로그인]
 - 아이디, 비밀번호, 닉네임, 이메일, 프로필 사진을 입력하면 가입할 수 있습니다.
 
 | 회원가입 |
 |----------|
-|![image](https://github.com/user-attachments/assets/3cc7e910-a630-4cc1-9f29-75c0e4222c44)|
-
+|<img width="544" height="660" alt="Image" src="https://github.com/user-attachments/assets/37459ccf-2a65-4393-9e08-ab85b5d0ea7d" />|
 <br>
 
-### [로그인]
-- 아이디와 비밀번호를 입력하면 입력창에서 유효성 검사를 통해 통과하지 못 할 경우 경고 문구가 나타나게 됩니다.
-- 아이디 형식이 유효하지 않거나 비밀번호가 틀렸을 경우에는 하단에 경구 문구가 나타납니다.
-- 로그인에 성공하면 홈 피드 화면으로 이동합니다.
-
-| 로그인 | 아이디 형식 틀림 | 아이디/비밀번호 틀림 |
-|----------|----------|----------|
-|![image](https://github.com/user-attachments/assets/e3ba6105-be37-4551-ac16-f40331f23f8e)|![image](https://github.com/user-attachments/assets/f51e77dd-fcc2-4f40-b5ba-e2ad7001de45)|![image](https://github.com/user-attachments/assets/f45eb59f-55bf-4a1f-bc2b-4d8cfe5073e3)
-
-<br>
 
 ### [로그아웃]
 - 우측 상단의 로그아웃 버튼을 클릭하면 로그아웃이 진행됩니다.
